@@ -69,7 +69,8 @@ parent(njord,yngviFrey).
 parent(odin,njord).
 
 %greatCount(X, Y, N)
-greatCount(X, X, 0).
+greatCount(X, Y, 0) :- parent(X, Y).
+greatCount(Y, X, 0) :- parent(X, Y).
 greatCount(X, Y, N) :- parent(X, Z), greatCount(Z, Y, M), N is M + 1.
 
 /* 
@@ -96,6 +97,15 @@ X = marg,
 Y = 0 ;
 X = johnAnderson,
 Y = 1 ;
+false.
+
+?- greatCount(X, fjolnirYngviFreysson, 3).
+X = njord ;
+false.
+
+?- greatCount(fjolnirYngviFreysson, X, 3).
+X = domaldeVanlandassanl ;
+X = vanlandeSvegdassal ;
 false.
 
 */
