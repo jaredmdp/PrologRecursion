@@ -67,3 +67,35 @@ parent(fjolnirYngviFreysson,sveigdeFjolnfarssen).
 parent(yngviFrey,fjolnirYngviFreysson).
 parent(njord,yngviFrey).
 parent(odin,njord).
+
+%greatCount(X, Y, N)
+greatCount(X, X, 0).
+greatCount(X, Y, N) :- parent(X, Z), greatCount(Z, Y, M), N is M + 1.
+
+/* 
+Tests
+
+?- greatCount(ragnarLothbrok, johnAnderson, X).
+X = 38 ;
+false.
+
+?- greatCount(brynhildrTheValkyrie, johnAnderson, X).
+X = 39 ;
+false.
+
+?- greatCount(odin, johnAnderson, X).
+X = 62 ;
+false.
+
+?- greatCount(odin,njord,X). 
+X = 1 ;
+false.
+
+?- greatCount(marg, X, Y).
+X = marg,
+Y = 0 ;
+X = johnAnderson,
+Y = 1 ;
+false.
+
+*/
